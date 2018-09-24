@@ -12,7 +12,6 @@ public class FromFileArrayCreator {
         for (int i = 1; i <= Parameters.FILE_AMOUNT; i++) {
             String fileName = Parameters.FILE_NAME + i + Parameters.FILE_EXPANSION;
             arrayWithNumberArrays.add(ReaderFromFile.readArrayFromFile(fileName));
-            System.out.println(arrayWithNumberArrays.get(i-1));
         }
         return arrayWithNumberArrays;
     }
