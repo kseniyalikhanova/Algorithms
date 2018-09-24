@@ -1,6 +1,9 @@
 package by.bsu.likhanova.hybridSorting.runner;
 
 import by.bsu.likhanova.hybridSorting.creator.FromFileArrayCreator;
+import by.bsu.likhanova.hybridSorting.parameter.Parameters;
+import by.bsu.likhanova.hybridSorting.sorts.HybridSort;
+import by.bsu.likhanova.hybridSorting.sorts.QuickSort;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,16 +16,25 @@ public class HybridSortingRunner {
 //            WriterInFile.writeArrayInFile(fileName);
 //            System.out.println("successfully");
 //        }
+
         ArrayList<int[]> arrayWithNumberArrays = FromFileArrayCreator.initArrays();
-       /* long start = System.nanoTime();
-
+        long start = System.nanoTime();
+        for (int[] array :
+                arrayWithNumberArrays) {
+            QuickSort.quickSort(array, 0, Parameters.ARRAY_LENGTH - 1);
+        }
         long finish = System.nanoTime();
-        System.out.println("");*/
+        long result = (finish - start) / Parameters.FILE_AMOUNT;
+        System.out.println("Average time of performance of QuickSort = " + String.format("%,12d", result) + " ns");
 
-
-
-
-
-
+        arrayWithNumberArrays = FromFileArrayCreator.initArrays();
+        start = System.nanoTime();
+        for (int[] array :
+                arrayWithNumberArrays) {
+            HybridSort.hybridSort(array, 0, Parameters.ARRAY_LENGTH - 1);
+        }
+        finish = System.nanoTime();
+        result = (finish - start) / Parameters.FILE_AMOUNT;
+        System.out.println("Average time of performance of HybridSort = " + String.format("%,12d", result) + " ns");
     }
 }
