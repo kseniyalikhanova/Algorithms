@@ -2,8 +2,8 @@ package by.bsu.likhanova.hybridSorting.runner;
 
 import by.bsu.likhanova.hybridSorting.creator.FromFileArrayCreator;
 import by.bsu.likhanova.hybridSorting.parameter.Parameters;
-import by.bsu.likhanova.hybridSorting.sorts.HybridSort;
-import by.bsu.likhanova.hybridSorting.sorts.QuickSort;
+import by.bsu.likhanova.hybridSorting.sorting.HybridSort;
+import by.bsu.likhanova.hybridSorting.sorting.QuickSort;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,8 +19,7 @@ public class HybridSortingRunner {
 
         ArrayList<int[]> arrayWithNumberArrays = FromFileArrayCreator.initArrays();
         long start = System.nanoTime();
-        for (int[] array :
-                arrayWithNumberArrays) {
+        for (int[] array : arrayWithNumberArrays) {
             QuickSort.quickSort(array, 0, Parameters.ARRAY_LENGTH - 1);
         }
         long finish = System.nanoTime();
@@ -29,12 +28,15 @@ public class HybridSortingRunner {
 
         arrayWithNumberArrays = FromFileArrayCreator.initArrays();
         start = System.nanoTime();
-        for (int[] array :
-                arrayWithNumberArrays) {
+        for (int[] array : arrayWithNumberArrays) {
             HybridSort.hybridSort(array, 0, Parameters.ARRAY_LENGTH - 1);
         }
         finish = System.nanoTime();
         result = (finish - start) / Parameters.FILE_AMOUNT;
         System.out.println("Average time of performance of HybridSort = " + String.format("%,12d", result) + " ns");
+        /*int[] a = {2,1,0,5,10,18,3,29,6,5,5,20,10};
+        ArrayPrinter.printArray(a);
+        QuickSort.quickSort(a, 0, a.length - 1);
+ArrayPrinter.printArray(a);*/
     }
 }
