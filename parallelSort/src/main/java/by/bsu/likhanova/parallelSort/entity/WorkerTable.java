@@ -1,33 +1,29 @@
 package by.bsu.likhanova.parallelSort.entity;
 
-import java.util.ArrayList;
-
 public class WorkerTable {
-    private ArrayList<Worker> workers;
+    private Worker[] workers;
 
-    public  WorkerTable(){
-        workers = new ArrayList<>();
+    public WorkerTable() {
+        workers = new Worker[10];
     }
-    public WorkerTable(ArrayList<Worker> workers) {
+
+    public WorkerTable(Worker[] workers) {
         this.workers = workers;
     }
 
-    public ArrayList<Worker> getWorkers() {
+    public Worker[] getWorkers() {
         return workers;
     }
 
-    public void setWorkers(ArrayList<Worker> workers) {
-        this.workers.addAll(workers);
+    public void setWorkers(Worker[] workers) {
+        this.workers = workers;
     }
 
-    public void addWorker(Worker worker){
-        workers.add(worker);
-    }
-
+    @Override
     public String toString() {
         String result = "";
         for (Worker worker : workers) {
-            result += worker.toString(false);
+            result = result.concat(worker.toString(false));
         }
         return result;
     }

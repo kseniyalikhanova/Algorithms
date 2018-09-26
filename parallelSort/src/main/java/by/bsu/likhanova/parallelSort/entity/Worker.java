@@ -36,7 +36,7 @@ public class Worker {
     }
 
     public String toString(boolean flag) {
-        if (flag){
+        if (flag) {
             return "Worker name = " + name + ", age = " + age + ", salary = " + salary + ";\n";
         } else {
             return "Worker name = " + name + ", age = " + age + ";\n";
