@@ -1,30 +1,24 @@
 package by.bsu.likhanova.parallelSort.entity;
 
-public class Worker {
-    private String name;
-    private int age;
+public class Worker extends Person {
     private int salary;
 
     public Worker(String name, int age, int salary) {
-        this.name = name;
-        this.age = age;
+        super(name, age);
         this.salary = salary;
     }
 
-    public String getName() {
-        return name;
+    public Worker(Person person, int salary){
+        super(person.name, person.age);
+        this.salary = salary;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public Worker(String name, int age) {
+        super(name, age);
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
+    public Worker(Person person){
+        super(person.name, person.age);
     }
 
     public int getSalary() {
@@ -35,11 +29,18 @@ public class Worker {
         this.salary = salary;
     }
 
-    public String toString(boolean flag) {
+    @Override
+    public String toString() {
+        return "Worker name = " + super.name +
+                ", age = " + super.age +
+                ", salary = " + salary +";\n";
+    }
+
+    /*public String toString(boolean flag) {
         if (flag) {
             return "Worker name = " + name + ", age = " + age + ", salary = " + salary + ";\n";
         } else {
             return "Worker name = " + name + ", age = " + age + ";\n";
         }
-    }
+    }*/
 }

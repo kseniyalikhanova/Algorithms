@@ -23,7 +23,7 @@ public class ChiefTable {
     public String toString() {
         String result = "";
         for (Worker worker : workers) {
-            result = result.concat(worker.toString(true));
+            result = result.concat(worker.toString());
         }
         return result;
     }

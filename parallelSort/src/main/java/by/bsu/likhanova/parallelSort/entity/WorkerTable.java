@@ -1,29 +1,29 @@
 package by.bsu.likhanova.parallelSort.entity;
 
 public class WorkerTable {
-    private Worker[] workers;
+    private Person[] workers;
 
     public WorkerTable() {
-        workers = new Worker[10];
+        workers = new Person[10];
     }
 
-    public WorkerTable(Worker[] workers) {
+    public WorkerTable(Person[] workers) {
         this.workers = workers;
     }
 
-    public Worker[] getWorkers() {
+    public Person[] getWorkers() {
         return workers;
     }
 
-    public void setWorkers(Worker[] workers) {
+    public void setWorkers(Person[] workers) {
         this.workers = workers;
     }
 
     @Override
     public String toString() {
         String result = "";
-        for (Worker worker : workers) {
-            result = result.concat(worker.toString(false));
+        for (Person worker : workers) {
+            result = result.concat(worker.toString());
         }
         return result;
     }
