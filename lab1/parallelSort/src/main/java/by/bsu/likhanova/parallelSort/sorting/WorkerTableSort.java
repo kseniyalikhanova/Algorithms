@@ -12,6 +12,7 @@ public class WorkerTableSort {
                     Person tmp = unsortedTable[i];
                     unsortedTable[i] = unsortedTable[j];
                     unsortedTable[j] = tmp;
+                    break;
                 }
             }
         }
