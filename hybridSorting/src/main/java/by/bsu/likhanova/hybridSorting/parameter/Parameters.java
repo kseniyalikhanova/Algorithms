@@ -6,6 +6,6 @@ public class Parameters {
     public static final int FILE_AMOUNT = 50;
     public static final String FILE_NAME = "src/main/resources/Array";
     public static final String FILE_EXPANSION = ".txt";
-    public static final int TRANSITION_TO_INSERTION_SORT = 100;
+    public static final int TRANSITION_TO_INSERTION_SORT = 110;
 
 }

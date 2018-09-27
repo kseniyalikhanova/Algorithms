@@ -34,9 +34,6 @@ public class HybridSortingRunner {
         finish = System.nanoTime();
         result = (finish - start) / Parameters.FILE_AMOUNT;
         System.out.println("Average time of performance of HybridSort = " + String.format("%,12d", result) + " ns");
-        /*int[] a = {2,1,0,5,10,18,3,29,6,5,5,20,10};
-        ArrayPrinter.printArray(a);
-        QuickSort.quickSort(a, 0, a.length - 1);
-ArrayPrinter.printArray(a);*/
+        System.out.println("When TRANSITION_TO_INSERTION_SORT = " + Parameters.TRANSITION_TO_INSERTION_SORT + ";");
     }
 }

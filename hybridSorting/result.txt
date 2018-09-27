@@ -1,0 +1,21 @@
+Average time of performance of QuickSort =    8 614 708 ns
+Average time of performance of HybridSort =    9 059 397 ns
+When TRANSITION_TO_INSERTION_SORT = 130;
+
+Average time of performance of QuickSort =    8 622 040 ns
+Average time of performance of HybridSort =    8 720 308 ns
+When TRANSITION_TO_INSERTION_SORT = 110;
+
+Average time of performance of QuickSort =    8 785 193 ns
+Average time of performance of HybridSort =    8 988 965 ns
+When TRANSITION_TO_INSERTION_SORT = 104;
+
+Average time of performance of QuickSort =    8 680 857 ns
+Average time of performance of HybridSort =    8 563 681 ns
+When TRANSITION_TO_INSERTION_SORT = 103;
+
+Average time of performance of QuickSort =    8 606 838 ns
+Average time of performance of HybridSort =    8 457 655 ns
+When TRANSITION_TO_INSERTION_SORT = 100;
+
+RESULT = 103
