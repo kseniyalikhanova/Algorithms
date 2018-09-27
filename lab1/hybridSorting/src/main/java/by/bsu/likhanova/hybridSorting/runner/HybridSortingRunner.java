@@ -11,11 +11,10 @@ import java.util.ArrayList;
 public class HybridSortingRunner {
     public static void main(String[] args) throws IOException {
 
-//        for (int i = 1; i <= Parameters.FILE_AMOUNT; i++) {
-//            String fileName = Parameters.FILE_NAME + i + Parameters.FILE_EXPANSION;
-//            WriterInFile.writeArrayInFile(fileName);
-//            System.out.println("successfully");
-//        }
+        /*for (int i = 1; i <= Parameters.FILE_AMOUNT; i++) {
+            String fileName = Parameters.FILE_NAME + i + Parameters.FILE_EXPANSION;
+            WriterInFile.writeArrayInFile(fileName);
+        }*/
 
         ArrayList<int[]> arrayWithNumberArrays = FromFileArrayCreator.initArrays();
         long start = System.nanoTime();
