@@ -1,21 +1,26 @@
 package by.bsu.likhanova.searchInSortedArray.search;
 
 public class BinarySearch {
-    public static int runBinarySearch(int[] array, int key){
+    public static int runBinarySearch(int[] array, int key) {
         int index = -1;
-        int left = 0, right = array.length, mid;
+        int left = 0;
+        int right = array.length - 1;
+        int middle;
         while (left < right) {
-            mid = left + (right-left)/2;
-            if (key == array[mid]) {
-                index = mid;
+            middle = left + (right - left) / 2;
+            if (key == array[middle]) {
+                index = middle;
                 break;
+            } else if (key < array[middle]) {
+                right = middle - 1;
             } else {
-                if (key <= array[mid]) {
-                    right = mid-1;
-                } else {
-                    left = mid + 1;
-                }
+                left = middle + 1;
             }
+        }
+        if (key == array[left]) {
+            index = left;
+        } else if (key == array[right]) {
+            index = right;
         }
         return index;
     }
