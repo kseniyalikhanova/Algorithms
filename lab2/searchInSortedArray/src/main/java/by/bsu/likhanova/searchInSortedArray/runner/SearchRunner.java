@@ -1,21 +1,21 @@
 package by.bsu.likhanova.searchInSortedArray.runner;
 
 import by.bsu.likhanova.searchInSortedArray.action.RandomNumbers;
+import by.bsu.likhanova.searchInSortedArray.printer.ArrayPrinter;
 import by.bsu.likhanova.searchInSortedArray.search.BinarySearch;
 import by.bsu.likhanova.searchInSortedArray.search.InterpolationSearch;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 
 public class SearchRunner {
     public static void main(String[] args) {
-        //int[] array = {1,30,50,102,130,200,301,302,309,405,511,512};
-        ArrayList<Integer> array = RandomNumbers.generateRandomArray(15, 0, 200);
+        ArrayList<Integer> array = RandomNumbers.generateRandomArray(12, 0, 200);
         Collections.sort(array);
+        System.out.println(array);
         int key = RandomNumbers.generateRandomNumber(0,array.size()-1);
         key = array.get(key);
+        System.out.println("Element for search: " + key);
         long start = 0;
         long finish = 0;
         start = System.nanoTime();

@@ -1,0 +1,16 @@
+result = 12;
+
+Binary search with 15 elements:      786 567 ns;
+Interpolation search with 15 elements:      730 074 ns;
+
+Binary search with 13 elements:      836 345 ns;
+Interpolation search with 13 elements:      756 544 ns;
+
+Binary search with 12 elements:      536 099 ns;
+Interpolation search with 12 elements:      602 469 ns;
+
+Binary search with 11 elements:      582 716 ns;
+Interpolation search with 11 elements:      777 876 ns;
+
+Binary search with 10 elements:      732 839 ns;
+Interpolation search with 10 elements:      745 086 ns;
