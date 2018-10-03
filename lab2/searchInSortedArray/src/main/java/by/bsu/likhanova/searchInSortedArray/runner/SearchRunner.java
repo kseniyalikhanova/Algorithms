@@ -1,18 +1,30 @@
 package by.bsu.likhanova.searchInSortedArray.runner;
 
+import by.bsu.likhanova.searchInSortedArray.action.RandomNumbers;
 import by.bsu.likhanova.searchInSortedArray.search.BinarySearch;
 import by.bsu.likhanova.searchInSortedArray.search.InterpolationSearch;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+
 public class SearchRunner {
     public static void main(String[] args) {
-        int[] array = {1,3,5,7,9,11,13,15,17,19,21,23,25,27,29};
-        long start = System.nanoTime();
-        System.out.println(BinarySearch.runBinarySearch(array,23));
-        long finish = System.nanoTime();
-        System.out.println("Binary search with " + array.length + " elements: " + String.format("%,12d", (finish-start)) + " ns;");
+        //int[] array = {1,30,50,102,130,200,301,302,309,405,511,512};
+        ArrayList<Integer> array = RandomNumbers.generateRandomArray(15, 0, 200);
+        Collections.sort(array);
+        int key = RandomNumbers.generateRandomNumber(0,array.size()-1);
+        key = array.get(key);
+        long start = 0;
+        long finish = 0;
         start = System.nanoTime();
-        System.out.println(InterpolationSearch.runInterpolationSearch(array,23));
+        System.out.println(BinarySearch.runBinarySearch(array,key));
+         finish = System.nanoTime();
+        System.out.println("Binary search with " + array.size() + " elements: " + String.format("%,12d", (finish-start)) + " ns;");
+        start = System.nanoTime();
+        System.out.println(InterpolationSearch.runInterpolationSearch(array,key));
         finish = System.nanoTime();
-        System.out.println("Interpolation search with " + array.length + " elements: " + String.format("%,12d", (finish-start)) + " ns;");
+        System.out.println("Interpolation search with " + array.size() + " elements: " + String.format("%,12d", (finish-start)) + " ns;");
     }
 }
