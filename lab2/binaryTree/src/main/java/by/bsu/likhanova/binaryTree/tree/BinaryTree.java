@@ -115,7 +115,7 @@ public class BinaryTree {
         if (value < root.value) {
             root.left = rootInsert(value, root.left);
             root = rotateRight(root);
-        } else {
+        } else if(value > root.value) {
             root.right = rootInsert(value, root.right);
             root = rotateLeft(root);
         }
