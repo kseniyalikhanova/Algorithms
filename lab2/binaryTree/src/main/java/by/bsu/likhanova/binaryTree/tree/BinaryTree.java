@@ -1,7 +1,7 @@
 package by.bsu.likhanova.binaryTree.tree;
 
 public class BinaryTree {
-     static class Node {
+    static class Node {
         int value;
         Node left;
         Node right;
@@ -43,7 +43,7 @@ public class BinaryTree {
     }
 
     public Node search(Node node, int value) {
-        if(node == null){
+        if (node == null) {
             return null;
         }
         if (value < node.value) {
@@ -103,5 +103,37 @@ public class BinaryTree {
         } else {
             return node;
         }
+    }
+
+    public void rootInsert(int value) {
+        root = rootInsert(value, root);
+    }
+
+    private Node rootInsert(int value, Node root) {
+        if (root == null)
+            return new Node(value);
+        if (value < root.value) {
+            root.left = rootInsert(value, root.left);
+            root = rotateRight(root);
+        } else {
+            root.right = rootInsert(value, root.right);
+            root = rotateLeft(root);
+        }
+        return root;
+
+    }
+
+    private Node rotateRight(Node h) {
+        Node x = h.left;
+        h.left = x.right;
+        x.right = h;
+        return x;
+    }
+
+    private Node rotateLeft(Node h) {
+        Node x = h.right;
+        h.right = x.left;
+        x.left = h;
+        return x;
     }
 }
