@@ -1,0 +1,4 @@
+Hash table with KNUT_NUMBER has maxCollisionListLength = 7
+Hash table with QUOTIENT_FROM_LN_BASIS_AND_PI has maxCollisionListLength = 6
+Hash table with QUOTIENT_FROM_SQRT_2_AND_3 has maxCollisionListLength = 7
+Hash table with QUOTIENT_FROM_SQRT2_AND_2 has maxCollisionListLength = 8
