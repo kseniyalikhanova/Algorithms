@@ -1,7 +1,6 @@
 package by.bsu.likhanova.algorithm;
 
 import by.bsu.likhanova.entity.UndirectedGraph;
-import by.bsu.likhanova.entity.Vertex;
 
 import java.util.ArrayDeque;
 import java.util.LinkedList;
@@ -9,7 +8,7 @@ import java.util.LinkedList;
 public class EulerCycle {
     public boolean isHasEulerCycle(final UndirectedGraph graph) {
         boolean isHasEulerCycle = true;
-        for (LinkedList<Vertex> vertices : graph.getAdjacencyList().values()) {
+        for (LinkedList<Integer[]> vertices : graph.getAdjacencyList().values()) {
             if (vertices.size() % 2 != 0) {
                 isHasEulerCycle = false;
                 break;
@@ -19,21 +18,21 @@ public class EulerCycle {
         return isHasEulerCycle;
     }
 
-    public ArrayDeque<Vertex> findEulerPath(final UndirectedGraph graph) {
-        ArrayDeque<Vertex> stack = new ArrayDeque<>();
-        ArrayDeque<Vertex> queue = new ArrayDeque<>();
-        Vertex topVertex;
-        Vertex nextVertex;
+    public ArrayDeque<Integer> findEulerPath(final UndirectedGraph graph) {
+        ArrayDeque<Integer> stack = new ArrayDeque<>();
+        ArrayDeque<Integer> queue = new ArrayDeque<>();
+        Integer topVertex;
+        Integer nextVertex;
 
         stack.push(graph.getAdjacencyList().keySet().iterator().next());
         while (!stack.isEmpty()) {
             topVertex = stack.peek();
             nextVertex = null;
 
-            for (Vertex vertex : graph.getAdjacencyList().get(topVertex)) {
-                if (!vertex.isMarked()) {
-                    nextVertex = vertex;
-                    graph.markEdge(topVertex, vertex);
+            for (Integer[] vertex : graph.getAdjacencyList().get(topVertex)) {
+                if (vertex[1] == 0) {
+                    nextVertex = vertex[0];
+                    graph.markEdge(topVertex, vertex[0]);
                     break;
                 }
             }

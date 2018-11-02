@@ -1,21 +1,22 @@
 package by.bsu.likhanova.entity;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 
 public class UndirectedGraph {
-    private Map<Vertex, LinkedList<Vertex>> adjacencyList;
+    private Map<Integer, LinkedList<Integer[]>> adjacencyList;
 
     public UndirectedGraph() {
         adjacencyList = new HashMap<>();
     }
 
-    public Map<Vertex, LinkedList<Vertex>> getAdjacencyList() {
+    public Map<Integer, LinkedList<Integer[]>> getAdjacencyList() {
         return adjacencyList;
     }
 
-    public void addVertex(final Vertex vertex) {
+    public void addVertex(final Integer vertex) {
         if (!adjacencyList.containsKey(vertex)) {
             adjacencyList.put(vertex, new LinkedList<>());
         } else {
@@ -23,12 +24,12 @@ public class UndirectedGraph {
         }
     }
 
-    public void removeVertex(final Vertex deletedVertex) {
+    public void removeVertex(final Integer deletedVertex) {
         if (adjacencyList.containsKey(deletedVertex)) {
-            LinkedList<Vertex> adjacencyListOfVertex = adjacencyList.get(deletedVertex);
+            LinkedList<Integer[]> adjacencyListOfVertex = adjacencyList.get(deletedVertex);
             adjacencyList.remove(deletedVertex);
-            for (Vertex vertex : adjacencyListOfVertex) {
-                adjacencyList.get(vertex).remove(deletedVertex);
+            for (Integer[] vertex : adjacencyListOfVertex) {
+                adjacencyList.get(vertex[0]).remove(searchEdge(vertex[0], deletedVertex));
             }
         } else {
             System.out.println("There is no such vertex.");
@@ -36,44 +37,43 @@ public class UndirectedGraph {
 
     }
 
-    public void addEdge(final Vertex firstVertex, final Vertex secondVertex) {
+    public void addEdge(final Integer firstVertex, final Integer secondVertex) {
+        Integer[] vertex1 = {firstVertex, 0};
+        Integer[] vertex2 = {secondVertex, 0};
         if (adjacencyList.containsKey(firstVertex)
                 && adjacencyList.containsKey(secondVertex)) {
-            adjacencyList.get(firstVertex).add(secondVertex);
-            adjacencyList.get(secondVertex).add(firstVertex);
+
+            adjacencyList.get(firstVertex).add(vertex2);
+            adjacencyList.get(secondVertex).add(vertex1);
         } else {
             System.out.println("There are no such vertices.");
         }
     }
 
-    public void removeEdge(final Vertex firstVertex, final Vertex secondVertex) {
+    public void removeEdge(final Integer firstVertex, final Integer secondVertex) {
         if (adjacencyList.containsKey(firstVertex)
                 && adjacencyList.containsKey(secondVertex)) {
-            adjacencyList.get(firstVertex).remove(secondVertex);
-            adjacencyList.get(secondVertex).remove(firstVertex);
+            adjacencyList.get(firstVertex).remove(searchEdge(firstVertex,secondVertex));
+            adjacencyList.get(secondVertex).remove(searchEdge(secondVertex, firstVertex));
         } else {
             System.out.println("There is no such edge.");
         }
     }
 
-    public void markEdge(final Vertex firstVertex, final Vertex secondVertex) {
-            adjacencyList.get(firstVertex).get(searchEdge(firstVertex, secondVertex)).setMarked();
-            adjacencyList.get(secondVertex).get(searchEdge(secondVertex, firstVertex)).setMarked();
+    public void markEdge(final Integer firstVertex, final Integer secondVertex) {
+        adjacencyList.get(firstVertex).get(searchEdge(firstVertex, secondVertex))[1] = 1;
+        adjacencyList.get(secondVertex).get(searchEdge(secondVertex, firstVertex))[1] = 1;
     }
 
-    public int searchEdge(final Vertex vertex, final Vertex adjacentVertex) {
+    public int searchEdge(final Integer vertex, final Integer adjacentVertex) {
         int resultVertex = -1;
-        LinkedList<Vertex> vertices = adjacencyList.get(vertex);
-        if (adjacencyList.containsKey(vertex)
-                && adjacencyList.containsKey(adjacentVertex)) {
-            for (int i = 0; i < vertices.size(); i++) {
-                if (vertices.get(i).equals(adjacentVertex)) {
-                    resultVertex = i;
-                    break;
-                }
+        LinkedList<Integer[]> vertices = adjacencyList.get(vertex);
+
+        for (int i = 0; i < vertices.size(); i++) {
+            if (vertices.get(i)[0].equals(adjacentVertex)) {
+                resultVertex = i;
+                break;
             }
-        } else {
-            System.out.println("There is no such edge.");
         }
         return resultVertex;
     }
@@ -88,9 +88,20 @@ public class UndirectedGraph {
         if (adjacencyList.isEmpty()) {
             resultString.append("Graph is empty.");
         } else {
-            resultString.append("UndirectedGraph{ ");
-            resultString.append(adjacencyList);
-            resultString.append(" }");
+            resultString.append("UndirectedGraph{\n");
+            for (Map.Entry<Integer, LinkedList<Integer[]>> entry : adjacencyList.entrySet()) {
+                resultString.append("[");
+                resultString.append(entry.getKey());
+                resultString.append(" = {");
+                for (Integer[] vertex : entry.getValue()) {
+                    resultString.append(vertex[0]);
+                    resultString.append(",");
+                }
+                resultString.deleteCharAt(resultString.length() -1);
+                resultString.append("}], ");
+            }
+            resultString.deleteCharAt(resultString.length() - 2);
+            resultString.append("}");
         }
         return resultString.toString();
     }
