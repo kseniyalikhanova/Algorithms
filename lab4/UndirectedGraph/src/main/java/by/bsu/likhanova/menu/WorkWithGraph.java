@@ -5,6 +5,7 @@ import by.bsu.likhanova.algorithm.BFS;
 import by.bsu.likhanova.algorithm.EulerCycle;
 import by.bsu.likhanova.entity.UndirectedGraph;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class WorkWithGraph {
@@ -25,6 +26,7 @@ public class WorkWithGraph {
                             "8)Default graph\n" +
                             "9)Find Euler path\n" +
                             "10)Find components\n" +
+                            "11)Find shares\n" +
                             "0)If you finished");
             switch (scanner.nextInt()) {
                 case 1:
@@ -78,6 +80,19 @@ public class WorkWithGraph {
                     if (graph != null) {
                         BFS bfs = new BFS(graph);
                         System.out.println(bfs.printComponents(bfs.findConnectivityComponents()));
+                    } else {
+                        System.out.println("Entered graph.");
+                    }
+                    break;
+                case 11:
+                    if (graph != null) {
+                        BFS bfs = new BFS(graph);
+                        List<List<Integer>> shares = bfs.isBipartiteGraph();
+                        if (shares == null){
+                            System.out.println("Graph is not bipartite");
+                        } else {
+                            System.out.println(shares);
+                        }
                     } else {
                         System.out.println("Entered graph.");
                     }
