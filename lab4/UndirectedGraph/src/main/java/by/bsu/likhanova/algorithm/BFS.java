@@ -17,7 +17,7 @@ public class BFS {
         }
     }
 
-    private List<Integer> bfs(final Integer startVertex) {
+    public List<Integer> bfs(final Integer startVertex) {
         ArrayDeque<Integer> queue = new ArrayDeque<>();
         List<Integer> vertices = new LinkedList<>();
         Integer topVertex;
