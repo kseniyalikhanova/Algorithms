@@ -4,11 +4,12 @@ import by.bsu.likhanova.entity.UndirectedGraph;
 
 import java.util.ArrayDeque;
 import java.util.LinkedList;
+import java.util.List;
 
 public class EulerCycle {
     public boolean isHasEulerCycle(final UndirectedGraph graph) {
         boolean isHasEulerCycle = true;
-        for (LinkedList<Integer[]> vertices : graph.getAdjacencyList().values()) {
+        for (List<Integer[]> vertices : graph.getAdjacencyList().values()) {
             if (vertices.size() % 2 != 0) {
                 isHasEulerCycle = false;
                 break;

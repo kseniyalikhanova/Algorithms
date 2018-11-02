@@ -1,18 +1,19 @@
 package by.bsu.likhanova.entity;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public class UndirectedGraph {
-    private Map<Integer, LinkedList<Integer[]>> adjacencyList;
+    // Integer[]: [0] = vertexNumber, [1] = isMarked this vertex (0 - false, 1 - true)
+    private Map<Integer, List<Integer[]>> adjacencyList;
 
     public UndirectedGraph() {
         adjacencyList = new HashMap<>();
     }
 
-    public Map<Integer, LinkedList<Integer[]>> getAdjacencyList() {
+    public Map<Integer, List<Integer[]>> getAdjacencyList() {
         return adjacencyList;
     }
 
@@ -26,7 +27,7 @@ public class UndirectedGraph {
 
     public void removeVertex(final Integer deletedVertex) {
         if (adjacencyList.containsKey(deletedVertex)) {
-            LinkedList<Integer[]> adjacencyListOfVertex = adjacencyList.get(deletedVertex);
+            List<Integer[]> adjacencyListOfVertex = adjacencyList.get(deletedVertex);
             adjacencyList.remove(deletedVertex);
             for (Integer[] vertex : adjacencyListOfVertex) {
                 adjacencyList.get(vertex[0]).remove(searchEdge(vertex[0], deletedVertex));
@@ -67,7 +68,7 @@ public class UndirectedGraph {
 
     public int searchEdge(final Integer vertex, final Integer adjacentVertex) {
         int resultVertex = -1;
-        LinkedList<Integer[]> vertices = adjacencyList.get(vertex);
+        List<Integer[]> vertices = adjacencyList.get(vertex);
 
         for (int i = 0; i < vertices.size(); i++) {
             if (vertices.get(i)[0].equals(adjacentVertex)) {
@@ -84,25 +85,20 @@ public class UndirectedGraph {
 
     @Override
     public String toString() {
-        StringBuilder resultString = new StringBuilder();
+        String resultString = "";
         if (adjacencyList.isEmpty()) {
-            resultString.append("Graph is empty.");
+            resultString += "Graph is empty.";
         } else {
-            resultString.append("UndirectedGraph{\n");
-            for (Map.Entry<Integer, LinkedList<Integer[]>> entry : adjacencyList.entrySet()) {
-                resultString.append("[");
-                resultString.append(entry.getKey());
-                resultString.append(" = {");
+            resultString += "UndirectedGraph{\n";
+            for (Map.Entry<Integer, List<Integer[]>> entry : adjacencyList.entrySet()) {
+                resultString += entry.getKey() + " = {";
                 for (Integer[] vertex : entry.getValue()) {
-                    resultString.append(vertex[0]);
-                    resultString.append(",");
+                    resultString += vertex[0] + ",";
                 }
-                resultString.deleteCharAt(resultString.length() -1);
-                resultString.append("}], ");
+                resultString += "}, ";
             }
-            resultString.deleteCharAt(resultString.length() - 2);
-            resultString.append("}");
+            resultString += "}";
         }
-        return resultString.toString();
+        return resultString;
     }
 }
