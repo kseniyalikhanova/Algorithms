@@ -2,14 +2,14 @@ package by.bsu.likhanova.entity;
 
 import java.util.*;
 
-public class UndirectedGraph {
+public class GraphWithEdgesList {
     private List<Edge> edges;
 
-    public UndirectedGraph() {
+    public GraphWithEdgesList() {
         edges = new LinkedList<>();
     }
 
-    public UndirectedGraph(final List<Edge> newEdges) {
+    public GraphWithEdgesList(final List<Edge> newEdges) {
         this.edges = newEdges;
     }
 
@@ -72,7 +72,7 @@ public class UndirectedGraph {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UndirectedGraph graph = (UndirectedGraph) o;
+        GraphWithEdgesList graph = (GraphWithEdgesList) o;
         return Objects.equals(edges, graph.edges);
     }
 
@@ -83,7 +83,7 @@ public class UndirectedGraph {
 
     @Override
     public String toString() {
-    return "UndirectedGraph{ "
+    return "GraphWithEdgesList{ "
                 + edges +
                 '}';
     }
