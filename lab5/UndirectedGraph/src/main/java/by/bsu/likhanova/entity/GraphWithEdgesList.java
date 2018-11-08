@@ -2,7 +2,7 @@ package by.bsu.likhanova.entity;
 
 import java.util.*;
 
-public class GraphWithEdgesList {
+public class GraphWithEdgesList extends UndirectedGraph {
     private List<Edge> edges;
 
     public GraphWithEdgesList() {

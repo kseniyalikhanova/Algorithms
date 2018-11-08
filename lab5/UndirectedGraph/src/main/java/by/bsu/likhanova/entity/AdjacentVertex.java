@@ -7,7 +7,8 @@ public class AdjacentVertex implements Comparable<AdjacentVertex> {
     private Integer weight;
 
     public AdjacentVertex(){
-
+        this.vertex = -1;
+        this.weight = -1;
     }
 
     public AdjacentVertex(final Integer newVertex, final Integer newWeight){
@@ -55,8 +56,8 @@ public class AdjacentVertex implements Comparable<AdjacentVertex> {
     }
 
     @Override
-    public int compareTo(AdjacentVertex adjacentVertex) {
-        return Integer.compare(this.weight, adjacentVertex.weight);
+    public int compareTo(AdjacentVertex other) {
+        return Integer.compare(this.weight, other.weight);
     }
 
     @Override
