@@ -57,7 +57,12 @@ public class AdjacentVertex implements Comparable<AdjacentVertex> {
 
     @Override
     public int compareTo(AdjacentVertex other) {
-        return Integer.compare(this.weight, other.weight);
+        int result;
+        result = Integer.compare(this.weight, other.weight);
+        if (result == 0) {
+            result = Integer.compare(this.vertex, other.vertex);
+        }
+        return result;
     }
 
     @Override

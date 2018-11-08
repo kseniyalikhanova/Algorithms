@@ -24,9 +24,11 @@ public class GraphWithEdgesList extends UndirectedGraph {
     public void addEdge(final int firstVertex,
                         final int secondVertex,
                         final int weight) {
-        Edge edge = new Edge(firstVertex, secondVertex, weight);
-        if (!edges.contains(edge)) {
-            edges.add(edge);
+        Edge edge1 = new Edge(firstVertex, secondVertex, weight);
+        Edge edge2 = new Edge(secondVertex, firstVertex, weight);
+        if (!edges.contains(edge1)
+            && !edges.contains(edge2)){
+            edges.add(edge1);
         } else {
             System.out.println("There is such edge.");
         }
