@@ -17,6 +17,10 @@ public class GraphWithEdgesList extends UndirectedGraph {
         return edges;
     }
 
+    public void setEdges(List<Edge> edges) {
+        this.edges = edges;
+    }
+
     public void addEdge(final int firstVertex,
                         final int secondVertex,
                         final int weight) {

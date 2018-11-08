@@ -1,9 +1,8 @@
 package by.bsu.likhanova.algorithm;
 
-import by.bsu.likhanova.action.ActionWithGraph;
+import by.bsu.likhanova.action.SearchingMinEdge;
 import by.bsu.likhanova.entity.GraphWithAdjacencyList;
 
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,7 +16,7 @@ public class Prim {
         unusedVertices.remove(0);
 
         while (!unusedVertices.isEmpty()){
-            Integer[] minEdge = ActionWithGraph.searchMinEdge(graph, unusedVertices,
+            Integer[] minEdge = SearchingMinEdge.searchMinEdge(graph, unusedVertices,
                                           minimalSkeletonGraph.getAdjacencyList().keySet());
             minimalSkeletonGraph.addVertex(minEdge[0]);
             minimalSkeletonGraph.addEdge(minEdge[0],
