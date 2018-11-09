@@ -14,26 +14,6 @@ import java.util.Scanner;
 public class WorkWithGraph {
     private static Scanner scanner = new Scanner(System.in);
 
-    /*private static UndirectedGraph chooseGraphType() {
-        while (true) {
-            System.out.println("Enter 1 if you would like to use Kruskal algorithm.\n" +
-                               "Enter 2 if you would like to use Prim algorithm.\n" +
-                               "Enter 3 if you would like to  look at association of edges " +
-                                        "after performance of both algorithms");
-            switch (scanner.nextInt()) {
-                case 1:
-                    return new GraphWithEdgesList();
-                case 2:
-                    return new GraphWithAdjacencyList();
-                case 3:
-                    return new UndirectedGraph();
-                default:
-                    System.out.println("Enter 1 or 2.");
-                    break;
-            }
-        }
-    }*/
-
     public static void printMenu() {
         boolean isOpenedMenu = true;
         while (isOpenedMenu) {

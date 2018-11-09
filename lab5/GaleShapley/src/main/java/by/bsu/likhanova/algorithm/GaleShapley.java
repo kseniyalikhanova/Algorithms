@@ -6,25 +6,26 @@ import java.util.*;
 
 public class GaleShapley {
 
-    private Map<Integer, Integer> calcMatchesByWork(GaleShapleyData data) {
-        // key = worker, value = work
+    public static Map<Integer, Integer> calcMatches(Map<Integer, Map<Integer, Integer>> menPreference,
+                                                    Map<Integer, Map<Integer, Integer>> womenPreference) {
+        // key = woman, value = man
         Map<Integer, Integer> matches = new HashMap<>();
-        List<Integer> freeWork = new LinkedList<>(data.getWorkPreference().keySet());
+        List<Integer> freeMen = new LinkedList<>(menPreference.keySet());
 
-        while (!freeWork.isEmpty()) {
-            Integer currentWork = ((LinkedList<Integer>) freeWork).pop();
-            for (Map.Entry<Integer, Integer> worker
-                    : data.getWorkPreference().get(currentWork).entrySet()) {
-                if (matches.get(worker.getKey()) == null) {
-                    matches.put(worker.getKey(), currentWork);
+        while (!freeMen.isEmpty()) {
+            Integer currentMan = ((LinkedList<Integer>) freeMen).pop();
+            for (Map.Entry<Integer, Integer> woman
+                    : menPreference.get(currentMan).entrySet()) {
+                if (matches.get(woman.getKey()) == null) {
+                    matches.put(woman.getKey(), currentMan);
                     break;
                 } else {
-                    Integer otherWork = worker.getKey();
-                    Map<Integer, Integer> works =
-                            data.getWorkerPreference().get(currentWork);
-                    if (works.get(currentWork) < works.get(matches.get(otherWork))) {
-                        matches.put(worker.getKey(), currentWork);
-                        freeWork.add(otherWork);
+                    Integer otherMan = matches.get(woman.getKey());
+                    Map<Integer, Integer> men =
+                            womenPreference.get(woman.getKey());
+                     if (men.get(currentMan) < men.get(otherMan)) {
+                        matches.put(woman.getKey(), currentMan);
+                        freeMen.add(otherMan);
                         break;
                     }
                 }

@@ -22,8 +22,8 @@ public class GaleShapleyData {
     }
 
     public void setWorkPreference(final  Map<Integer, Map<Integer, Integer>> workPreference) {
-        for (Map.Entry<Integer, Map<Integer, Integer>> entry : workPreference.entrySet()) {
-            this.workPreference.put(entry.getKey(), Sorting.sortMapByValue(entry.getValue()));
+        for (Map.Entry<Integer, Map<Integer, Integer>> work : workPreference.entrySet()) {
+            this.workPreference.put(work.getKey(), Sorting.sortMapByValue(work.getValue()));
         }
     }
 
@@ -32,8 +32,8 @@ public class GaleShapleyData {
     }
 
     public void setWorkerPreference(final  Map<Integer, Map<Integer, Integer>> workerPreference) {
-        for (Map.Entry<Integer, Map<Integer, Integer>> entry : workerPreference.entrySet()) {
-            this.workerPreference.put(entry.getKey(), Sorting.sortMapByValue(entry.getValue()));
+        for (Map.Entry<Integer, Map<Integer, Integer>> worker : workerPreference.entrySet()) {
+            this.workerPreference.put(worker.getKey(), Sorting.sortMapByValue(worker.getValue()));
         }
     }
 }
