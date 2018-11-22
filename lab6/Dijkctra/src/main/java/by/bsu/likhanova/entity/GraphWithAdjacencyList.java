@@ -44,7 +44,6 @@ public class GraphWithAdjacencyList {
                 && adjacencyList.containsKey(secondVertex)) {
 
             adjacencyList.get(firstVertex).add(new AdjacentVertex(secondVertex, weight));
-            adjacencyList.get(secondVertex).add(new AdjacentVertex(firstVertex, weight));
         } else {
             System.out.println("There are no such vertices.");
         }
@@ -56,8 +55,6 @@ public class GraphWithAdjacencyList {
                 && adjacencyList.containsKey(adjacentVertex.getVertex())) {
 
             adjacencyList.get(firstVertex).add(adjacentVertex);
-            adjacencyList.get(adjacentVertex.getVertex())
-                    .add(new AdjacentVertex(firstVertex, adjacentVertex.getWeight()));
         } else {
             System.out.println("There are no such vertices.");
         }
@@ -67,7 +64,6 @@ public class GraphWithAdjacencyList {
         if (adjacencyList.containsKey(firstVertex)
                 && adjacencyList.containsKey(secondVertex)) {
             adjacencyList.get(firstVertex).remove(searchEdge(firstVertex,secondVertex));
-            adjacencyList.get(secondVertex).remove(searchEdge(secondVertex, firstVertex));
         } else {
             System.out.println("There is no such edge.");
         }
