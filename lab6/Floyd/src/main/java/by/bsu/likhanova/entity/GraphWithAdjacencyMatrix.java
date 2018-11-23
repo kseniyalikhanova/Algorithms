@@ -3,13 +3,16 @@ package by.bsu.likhanova.entity;
 import static java.util.Arrays.fill;
 
 public class GraphWithAdjacencyMatrix {
+    private static final int INFINITY = Integer.MAX_VALUE;
     private int size;
     private int[][] adjacencyMatrix;
 
     public GraphWithAdjacencyMatrix(final int newSize) {
         this.size = newSize;
         adjacencyMatrix = new int[size][size];
-        fill(adjacencyMatrix, Integer.MAX_VALUE);
+        for (int i = 0; i < adjacencyMatrix.length; i++) {
+            fill(adjacencyMatrix[i], INFINITY);
+        }
         for (int i = 0; i < size; i++) {
             adjacencyMatrix[i][i] = 0;
         }
@@ -44,15 +47,17 @@ public class GraphWithAdjacencyMatrix {
         if (firstVertex != secondVertex
                 && firstVertex < adjacencyMatrix.length
                 && secondVertex < adjacencyMatrix.length) {
-            adjacencyMatrix[firstVertex][secondVertex] = Integer.MAX_VALUE;
-            adjacencyMatrix[secondVertex][firstVertex] = Integer.MAX_VALUE;
+            adjacencyMatrix[firstVertex][secondVertex] = INFINITY;
+            adjacencyMatrix[secondVertex][firstVertex] = INFINITY;
         } else {
             System.out.println("There is no such edge.");
         }
     }
 
     public void clear() {
-        fill(adjacencyMatrix, Integer.MAX_VALUE);
+        for (int i = 0; i < adjacencyMatrix.length; i++) {
+            fill(adjacencyMatrix[i], INFINITY);
+        }
         for (int i = 0; i < adjacencyMatrix.length; i++) {
             adjacencyMatrix[i][i] = 0;
         }
@@ -73,10 +78,17 @@ public class GraphWithAdjacencyMatrix {
                 resultString += "_____";
             }
         }
+        resultString += "\n";
         for (int i = 0; i < adjacencyMatrix.length; i++) {
+            resultString += i + 1 + " | ";
             for (int j = 0; j < adjacencyMatrix.length; j++) {
-                resultString += i + " | " + adjacencyMatrix[i][j];
+                if (adjacencyMatrix[i][j] != INFINITY) {
+                    resultString += adjacencyMatrix[i][j] + " ";
+                } else {
+                    resultString += "null ";
+                }
             }
+            resultString += "\n";
         }
         resultString += "}";
 
