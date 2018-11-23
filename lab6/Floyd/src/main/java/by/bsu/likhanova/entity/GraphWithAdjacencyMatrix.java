@@ -19,6 +19,10 @@ public class GraphWithAdjacencyMatrix {
         return adjacencyMatrix;
     }
 
+    public int getSize() {
+        return size;
+    }
+
     public void addEdge(final int firstVertex,
                         final int secondVertex,
                         final int weight) {
