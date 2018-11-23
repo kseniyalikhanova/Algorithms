@@ -1,18 +1,15 @@
 package by.bsu.likhanova.entity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeSet;
-
 import static java.util.Arrays.fill;
 
 public class GraphWithAdjacencyMatrix {
+    private int size;
     private int[][] adjacencyMatrix;
 
-    public GraphWithAdjacencyMatrix(final int size) {
+    public GraphWithAdjacencyMatrix(final int newSize) {
+        this.size = newSize;
         adjacencyMatrix = new int[size][size];
-        fill(adjacencyMatrix, int.MAX_VALUE);
+        fill(adjacencyMatrix, Integer.MAX_VALUE);
         for (int i = 0; i < size; i++) {
             adjacencyMatrix[i][i] = 0;
         }
@@ -25,14 +22,14 @@ public class GraphWithAdjacencyMatrix {
     public void addEdge(final int firstVertex,
                         final int secondVertex,
                         final int weight) {
-        if(weight > 0 ) {
+        if (weight > 0) {
             if (firstVertex != secondVertex
-                    &&firstVertex < adjacencyMatrix.length
+                    && firstVertex < adjacencyMatrix.length
                     && secondVertex < adjacencyMatrix.length) {
                 adjacencyMatrix[firstVertex][secondVertex] = weight;
                 adjacencyMatrix[secondVertex][firstVertex] = weight;
             } else {
-                System.out.println("There are no such vertices or .");
+                System.out.println("There are no such vertices or this is the same vertex.");
             }
         } else {
             System.out.println("Weight must be more then 0");
@@ -50,33 +47,35 @@ public class GraphWithAdjacencyMatrix {
         }
     }
 
-    public AdjacentVertex searchEdge(final int vertex, final int adjacentVertex) {
-        AdjacentVertex resultVertex = new AdjacentVertex();
-        for (AdjacentVertex curVertex : adjacencyMatrix.get(vertex)) {
-            if (curVertex.getVertex().equals(adjacentVertex)) {
-                resultVertex = curVertex;
-                break;
-            }
-        }
-        return resultVertex;
-    }
-
     public void clear() {
-        adjacencyMatrix.clear();
+        fill(adjacencyMatrix, Integer.MAX_VALUE);
+        for (int i = 0; i < adjacencyMatrix.length; i++) {
+            adjacencyMatrix[i][i] = 0;
+        }
     }
 
     @Override
     public String toString() {
         String resultString = "";
-        if (adjacencyMatrix.isEmpty()) {
-            resultString += "Graph is empty.";
-        } else {
-            resultString += "Graph{\n";
-            for (Map.Entry<int, TreeSet<AdjacentVertex>> entry : adjacencyMatrix.entrySet()) {
-                resultString += entry + "\n";
-            }
-            resultString += "}";
+        resultString += "Graph{\n";
+        for (int i = 1; i <= adjacencyMatrix.length; i++) {
+            resultString += "   " + i;
         }
+        resultString += "\n";
+        for (int i = 0; i < adjacencyMatrix.length; i++) {
+            if (i == 0) {
+                resultString += "   __";
+            } else {
+                resultString += "_____";
+            }
+        }
+        for (int i = 0; i < adjacencyMatrix.length; i++) {
+            for (int j = 0; j < adjacencyMatrix.length; j++) {
+                resultString += i + " | " + adjacencyMatrix[i][j];
+            }
+        }
+        resultString += "}";
+
         return resultString;
     }
 }
