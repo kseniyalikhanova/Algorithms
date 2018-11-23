@@ -25,7 +25,7 @@ public class WorkWithGraph {
                     "8)Default graph\n" +
                     "9)Search shortest route\n" +
                     "0)If you finished");
-            switch (scanner.nextInt()) {
+            switch (enterNumber("Choose number from the menu")) {
                 case 1:
                     System.out.println(
                             "When creating a graph, vertices are added first and then edges. " +
@@ -72,13 +72,10 @@ public class WorkWithGraph {
                     graph = CreatorDefaultGraph.createDefaultGraph();
                     break;
                 case 9:
-                    Dijkstra dijkstra = new Dijkstra();
                     int startVertex = enterNumber("Enter the start vertex number for dijkstra(int): ");
-                    int endVertex = enterNumber("Enter the end vertex number for dijkstra(int): ");
-                    dijkstra.searchShortestRoute(graph, startVertex, endVertex);
-                    System.out.println("Shortest route from " + startVertex + " vertex to "
-                                        + endVertex + " vertex =" + dijkstra.getShortestRoute());
-                    System.out.println("Length of shortest route = " + dijkstra.getShortestRouteLength());
+                    Dijkstra dijkstra = new Dijkstra(graph, startVertex);
+                    dijkstra.perform();
+                    chooseRoute(dijkstra);
                     break;
                 case 0:
                     isOpenedMenu = false;
@@ -97,5 +94,24 @@ public class WorkWithGraph {
             System.out.println(msg);
         }
         return scanner.nextInt();
+    }
+
+    private static void chooseRoute(final Dijkstra dijkstra) {
+        boolean isOpenedMenu = true;
+        while (isOpenedMenu) {
+            int number = enterNumber("\nEnter the end vertex number for dijkstra(int)\n" +
+                                          "0) If you finished.");
+            switch (number) {
+                case 0:
+                    isOpenedMenu = false;
+                    break;
+                default:
+                    dijkstra.searchShortestRoute(number);
+                    System.out.println("Shortest route from " + dijkstra.getStartVertex() + " vertex to "
+                                        + number + " vertex =" + dijkstra.getShortestRoute());
+                    System.out.println("Length of shortest route = " + dijkstra.getShortestRouteLength());
+                    break;
+            }
+        }
     }
 }

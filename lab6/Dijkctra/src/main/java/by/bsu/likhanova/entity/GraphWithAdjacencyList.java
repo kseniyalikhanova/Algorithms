@@ -40,12 +40,17 @@ public class GraphWithAdjacencyList {
     public void addEdge(final Integer firstVertex,
                         final Integer secondVertex,
                         final Integer weight) {
-        if (adjacencyList.containsKey(firstVertex)
-                && adjacencyList.containsKey(secondVertex)) {
+        if(weight > 0 ) {
+            if (adjacencyList.containsKey(firstVertex)
+                    && adjacencyList.containsKey(secondVertex)
+                    ) {
 
-            adjacencyList.get(firstVertex).add(new AdjacentVertex(secondVertex, weight));
+                adjacencyList.get(firstVertex).add(new AdjacentVertex(secondVertex, weight));
+            } else {
+                System.out.println("There are no such vertices.");
+            }
         } else {
-            System.out.println("There are no such vertices.");
+            System.out.println("Weight must be more then 0");
         }
     }
 
@@ -53,7 +58,6 @@ public class GraphWithAdjacencyList {
                         final AdjacentVertex adjacentVertex) {
         if (adjacencyList.containsKey(firstVertex)
                 && adjacencyList.containsKey(adjacentVertex.getVertex())) {
-
             adjacencyList.get(firstVertex).add(adjacentVertex);
         } else {
             System.out.println("There are no such vertices.");
@@ -90,7 +94,7 @@ public class GraphWithAdjacencyList {
         if (adjacencyList.isEmpty()) {
             resultString += "Graph is empty.";
         } else {
-            resultString += "UndirectedGraph{\n";
+            resultString += "Graph{\n";
             for (Map.Entry<Integer, TreeSet<AdjacentVertex>> entry : adjacencyList.entrySet()) {
                 resultString += entry + "\n";
             }
