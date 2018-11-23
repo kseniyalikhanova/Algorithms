@@ -1,5 +1,6 @@
 package by.bsu.likhanova.menu;
 
+import by.bsu.likhanova.action.Searching;
 import by.bsu.likhanova.algorithm.Floyd;
 import by.bsu.likhanova.entity.GraphWithAdjacencyMatrix;
 
@@ -15,25 +16,26 @@ public class WorkWithGraph {
         while (isOpenedMenu) {
             System.out.println(
                     "1)Print Instruction\n" +
-                    "2)Create graph\n" +
-                    "3)Add edge\n" +
-                    "4)Delete edge\n" +
-                    "5)Print graph\n" +
-                    "6)Clear the graph\n" +
-                    "7)Floyd's algorithm\n" +
-                    "0)If you finished"
+                            "2)Create graph\n" +
+                            "3)Add edge\n" +
+                            "4)Delete edge\n" +
+                            "5)Print graph\n" +
+                            "6)Clear the graph\n" +
+                            "7)Floyd's algorithm\n" +
+                            "8)Optimal location of the fire station\n" +
+                            "0)If you finished"
             );
             switch (enterNumber("Choose number from the menu")) {
                 case 1:
                     System.out.println(
                             "At creation a graph, it is necessary to set the size of the graph.\n" +
-                            "If the selected vertices do not exist, " +
+                                    "If the selected vertices do not exist, " +
                                     "then the edge will not be created.\n" +
-                            "At addition of new edge " +
+                                    "At addition of new edge " +
                                     " it is necessary to specify three numbers: " +
                                     "numbers of two tops and edge weight.\n" +
-                            "The value of the edge weight is an integer and more then 0.\n"
-                            );
+                                    "The value of the edge weight is an integer and more then 0.\n"
+                    );
                     break;
                 case 2:
                     int size = -1;
@@ -43,20 +45,32 @@ public class WorkWithGraph {
                     graph = new GraphWithAdjacencyMatrix(size);
                     break;
                 case 3:
-                    graph.addEdge(
-                            enterNumber("Enter first vertex number of edge(int): ") - 1,
-                            enterNumber("Enter second vertex number of edge(int): ") - 1,
-                            enterNumber("Enter edge weight (int) > 0: ")
-                    );
+                    if (graph != null) {
+                        graph.addEdge(
+                                enterNumber("Enter first vertex number of edge(int): ") - 1,
+                                enterNumber("Enter second vertex number of edge(int): ") - 1,
+                                enterNumber("Enter edge weight (int) > 0: ")
+                        );
+                    } else {
+                        System.out.println("Create a graph.");
+                    }
                     break;
                 case 4:
-                    graph.removeEdge(
-                            enterNumber("Enter first vertex number of edge(int): ") - 1,
-                            enterNumber("Enter second vertex number of edge(int): ") - 1
-                    );
+                    if (graph != null) {
+                        graph.removeEdge(
+                                enterNumber("Enter first vertex number of edge(int): ") - 1,
+                                enterNumber("Enter second vertex number of edge(int): ") - 1
+                        );
+                    } else {
+                        System.out.println("Create a graph.");
+                    }
                     break;
                 case 5:
-                    System.out.println(graph);
+                    if (graph != null) {
+                        System.out.println(graph);
+                    } else {
+                        System.out.println("Create a graph.");
+                    }
                     break;
                 case 6:
                     if (graph != null) {
@@ -64,8 +78,22 @@ public class WorkWithGraph {
                     }
                     break;
                 case 7:
-                    GraphWithAdjacencyMatrix floydGraph = Floyd.perform(graph);
-                    System.out.println(floydGraph);
+                    if (graph != null) {
+                        GraphWithAdjacencyMatrix floyd = Floyd.perform(graph);
+                        System.out.println(floyd);
+                    } else {
+                        System.out.println("Create a graph.");
+                    }
+                    break;
+                case 8:
+                    if (graph != null) {
+                        GraphWithAdjacencyMatrix floydGraph = Floyd.perform(graph);
+                        int optimalLocation = Searching.searchOptimalLocationOfFireStation(floydGraph);
+                        System.out.println("Crossroads at number " + optimalLocation
+                                + "is optimal location of the fire station");
+                    } else {
+                        System.out.println("Create a graph.");
+                    }
                     break;
                 case 0:
                     isOpenedMenu = false;
