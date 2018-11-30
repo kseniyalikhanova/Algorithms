@@ -1,22 +1,36 @@
 package by.bsu.likhanova.algorithm;
 
 import by.bsu.likhanova.entity.GraphWithAdjacencyList;
+import by.bsu.likhanova.wrapper.ChangedBoolean;
+import by.bsu.likhanova.wrapper.ChangedInteger;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static java.lang.Integer.min;
 
 public class DFS {
 
-    private List<Integer> cutPoints;
     private GraphWithAdjacencyList graph;
+    private Map<Integer, ChangedInteger> height;
+    private Map<Integer, ChangedInteger> f;
+    private Map<Integer, ChangedBoolean> usedVertex;
+    private List<Integer> cutPoints;
+    private List<Integer> additionalEdges;
 
     public DFS(GraphWithAdjacencyList newGraph) {
-        cutPoints = new LinkedList<>();
-        graph = newGraph;
+        this.graph = newGraph;
+        this.cutPoints = new LinkedList<>();
+        this.additionalEdges = new ArrayList<>();
+
+        this.height = new HashMap<>();
+        this.f = new HashMap<>();
+        this.usedVertex = new HashMap<>();
+        for (Map.Entry<Integer, List<Integer>> entry : graph.getAdjacencyList().entrySet()) {
+            height.put(entry.getKey(), new ChangedInteger());
+            f.put(entry.getKey(), new ChangedInteger());
+            usedVertex.put(entry.getKey(), new ChangedBoolean());
+        }
+
     }
 
     public List<Integer> getCutPoints() {
@@ -28,40 +42,50 @@ public class DFS {
     }
 
     //f[vertex] - min height from vertexHeight and childHeight
-    public void completeToBiconnected(Integer vertex, Integer parent,
-                                      int vertexHeight, int[] height,
-                                      int[] f, boolean[] visited) {
+    public void searchCutPoints(Integer vertex, Integer parent, int vertexHeight) {
         if (vertex - 1 != 0) {
-            height[vertex - 1] = vertexHeight++;
+            height.get(vertex).value = vertexHeight++;
         }
-        f[vertex - 1] = height[vertex - 1];
-        visited[vertex - 1] = true;
+        f.get(vertex).value = height.get(vertex).value;
+        usedVertex.get(vertex).value = true;
         int children = 0;
-        /*Iterator graphIterator = graph.getAdjacencyList().entrySet().iterator();
-        List<Integer> vertexChildren;
-        while (graphIterator.hasNext())
-        {
-            vertexChildren = (List<Integer>)graphIterator.next();
-            graphIterator.remove(child);
-        }*/
         for (Integer child : graph.getAdjacencyList().get(vertex)) {
             if (child.equals(parent)) {
                 continue;
             }
-            if (!visited[child - 1]) {
-                completeToBiconnected(child, vertex, vertexHeight, height, f, visited);
-                f[vertex - 1] = min(f[vertex - 1], f[child - 1]);
-                if (f[child - 1] >= height[vertex - 1] && parent != null) {
-                    cutPoints.add(vertex);
-                    graph.addEdge(child, parent);
-                    completeToBiconnected(vertex, parent, vertexHeight, height, f, visited);
+            if (!usedVertex.get(child).value) {
+                searchCutPoints(child, vertex, vertexHeight);
+                f.get(vertex).value = min(f.get(vertex).value, f.get(child).value);
+
+                if (f.get(child).value >= height.get(vertex).value && parent != null) {
+                    if (!cutPoints.contains(vertex)) {
+                        cutPoints.add(vertex);
+                    }
+                    additionalEdges.add(child);
+                    additionalEdges.add(parent);
                 }
+
                 ++children;
             } else
-                f[vertex - 1] = min(f[vertex - 1], height[child - 1]);
+                f.get(vertex).value = min(f.get(vertex).value, height.get(child).value);
         }
         if (parent == null && children > 1) {
             cutPoints.add(vertex);
+            int i = 0;
+            for (Integer child : graph.getAdjacencyList().get(vertex)) {
+                additionalEdges.add(child);
+                if (i > 0 && i < graph.getAdjacencyList().get(vertex).size() - 1) {
+                    additionalEdges.add(child);
+                }
+                ++i;
+            }
         }
+    }
+
+    public GraphWithAdjacencyList completeToBiconnectedGraph() {
+        for (int i = 0; i < additionalEdges.size(); i++) {
+            graph.addEdge(additionalEdges.get(i), additionalEdges.get(++i));
+        }
+        return graph;
     }
 }

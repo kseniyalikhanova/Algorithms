@@ -18,7 +18,8 @@ public class WorkWithGraph {
                       "6)Print graph\n" +
                       "7)Clear the graph\n" +
                       "8)Default graph\n" +
-                      "9)Define the graph is biconnected\n" +
+                      "9)Default tree\n" +
+                      "10)Define the graph is biconnected\n" +
                       "0)If you finished";
         boolean isOpenedMenu = true;
         while (isOpenedMenu) {
@@ -55,25 +56,28 @@ public class WorkWithGraph {
                     System.out.println(graph);
                     break;
                 case 7:
-                    if (graph != null) {
+                    if (graph != null && graph.getVertexAmount() != 0) {
                         graph.clear();
                     }
                     break;
                 case 8:
-                    System.out.println("Default graph");
                     CreatorDefaultGraph.createDefaultGraph(graph);
                     break;
                 case 9:
-                    if (graph != null) {
+                    CreatorDefaultGraph.createDefaultTree(graph);
+                    break;
+                case 10:
+                    if (graph != null && graph.getVertexAmount() != 0) {
                         DFS dfs = new DFS(graph);
-                        dfs.completeToBiconnected(graph.getAdjacencyList().keySet().iterator().next(),
-                                null, 0, new int[graph.getAdjacencyList().keySet().size()],
-                                new int[graph.getAdjacencyList().keySet().size()],
-                                new boolean[graph.getAdjacencyList().keySet().size()]);
+
+                        dfs.searchCutPoints(
+                                graph.getAdjacencyList().keySet().iterator().next(),
+                                null, 0);
                         if (dfs.getCutPoints().isEmpty()) {
                             System.out.println("This graph is biconnected.");
                         } else {
                             System.out.println("Cut points = " + dfs.getCutPoints());
+                            graph = dfs.completeToBiconnectedGraph();
                             System.out.println("The graph is completed to the biconnected.");
                             System.out.println(graph);
                         }

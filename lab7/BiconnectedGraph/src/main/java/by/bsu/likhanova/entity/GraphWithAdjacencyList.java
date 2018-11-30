@@ -37,12 +37,20 @@ public class GraphWithAdjacencyList {
 
     }
 
+    public int getVertexAmount() {
+        return adjacencyList.keySet().size();
+    }
+
     public void addEdge(final Integer firstVertex, final Integer secondVertex) {
         if (adjacencyList.containsKey(firstVertex)
                 && adjacencyList.containsKey(secondVertex)) {
-            adjacencyList.get(firstVertex).add(secondVertex);
-            if (!firstVertex.equals(secondVertex)) {
-                adjacencyList.get(secondVertex).add(firstVertex);
+            if(!adjacencyList.get(firstVertex).contains(secondVertex)) {
+                adjacencyList.get(firstVertex).add(secondVertex);
+                if (!firstVertex.equals(secondVertex)) {
+                    adjacencyList.get(secondVertex).add(firstVertex);
+                }
+            } else {
+                System.out.println("There is such edge.");
             }
         } else {
             System.out.println("There are no such vertices.");
